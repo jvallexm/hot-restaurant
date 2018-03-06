@@ -41,7 +41,7 @@
                 <br>
                 <button type="button" class="btn btn-lg btn-danger" id="make-reservation">
                     <span class="glyphicon glyphicon-credit-card"></span>
-                    View Tables</button>
+                    Make Reservation</button>
                 <button type="button" class="btn btn-lg" id="view-tables">
                     <span class="glyphicon glyphicon-home"></span>
                 </button>
@@ -58,13 +58,23 @@
                             <strong>Current Reservation</strong>
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" id="reserve-panel">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        <div class="well">
-                            <h2>
-                                <span class="label label-primary">1</span>
-                            </h2>
-                        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+                <!-- First panel is for handling the search parameters -->
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <strong>Waitlist</strong>
+                        </h3>
+                    </div>
+                    <div class="panel-body" id="wait-panel">
                     </div>
                 </div>
             </div>
@@ -92,6 +102,70 @@
 
             </div>
         </div>
+
+        <!-- script starts here -->
+        <script type="text/javascript">
+
+            getReservations();
+
+            getWaitList();
+
+            function getReservations() {
+                $.get("/api/tables", function (data) {
+                    console.log(data);
+
+                    let wellText = 0;
+                    // for each reservation in the data object array..
+                    data.forEach(reservation => {
+                        // create a div with class "well"
+                        const wellDiv = $("<div>").attr("class", "well");
+                        const wellHeader = $("<h2>");
+                        const wellSpan = $("<span>").attr("class", "label label-primary");
+
+                        wellText++;
+
+                        wellSpan.text(wellText);
+                        wellHeader.append(wellSpan);
+
+                        wellHeader.append(" | " + data[0].unique_id);
+
+                        wellDiv.append(wellHeader);
+
+                        $("#reserve-panel").append(wellDiv);
+                    });
+
+                });
+
+            }
+
+            function getWaitList() {
+                $.get("/api/waitlist", function (data) {
+                    console.log(data);
+
+                    let wellText = 0;
+                    // for each reservation in the data object array..
+                    data.forEach(reservation => {
+                        // create a div with class "well"
+                        const wellDiv = $("<div>").attr("class", "well");
+                        const wellHeader = $("<h2>");
+                        const wellSpan = $("<span>").attr("class", "label label-primary");
+
+                        wellText++;
+
+                        wellSpan.text(wellText);
+                        wellHeader.append(wellSpan);
+
+                        wellHeader.append(" | " + data[0].unique_id);
+
+                        wellDiv.append(wellHeader);
+
+                        $("#wait-panel").append(wellDiv);
+                    });
+
+                });
+            }
+
+        </script>
 </body>
 
 </html>
