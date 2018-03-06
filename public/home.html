@@ -118,7 +118,26 @@
 
     <!-- script starts here -->
     <script type="text/javascript">
-      // $("#view-tables").on
+      $("#run-submit").on("click", function (event) {
+        event.preventDefault();
+        const newReservation = {
+          name: $("#name-input").val().trim(),
+          phone: $("#phone-input").val().trim(),
+          email: $("#email-input").val().trim(),
+          unique_id: $("#id-input").val().trim()
+        };
+
+        // Question: What does this code do??
+        $.post("/api/reservations", newReservation)
+          .then(function (data) {
+
+            console.log(data);
+            $("#name-input").val("");
+            $("#phone-input").val("");
+            $("#email-input").val("");
+            $("#id-input").val("");
+          });
+      });
 
     </script>
 </body>
