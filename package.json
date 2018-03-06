@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/jvallexm/hot-restaurant/issues"
   },
-  "homepage": "https://github.com/jvallexm/hot-restaurant#readme"
+  "homepage": "https://github.com/jvallexm/hot-restaurant#readme",
+  "start": "node server",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "path": "^0.12.7"
+  }
 }
