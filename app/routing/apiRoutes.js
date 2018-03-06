@@ -1,5 +1,9 @@
-const current  = [];
-const waitList = [];
+const current  = [{
+    unique_id: "We Called Ahead"
+}];
+const waitList = [{
+    unique_id: "We Called Five Minutes Ago"
+}];
 
 module.exports = function(app){
 
